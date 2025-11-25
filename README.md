@@ -106,12 +106,8 @@ A lógica da aranha está no componente `SpiderWireframe` dentro de `Hero.tsx`. 
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT
+Este projeto está licenciado sob a licença MIT.
 
 ---
 
 Feito com 🖤 por Ruan Oliveira Sena
-
-```
-
-```
