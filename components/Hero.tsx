@@ -2,17 +2,12 @@
 
 import { motion, Variants } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 // --- COMPONENTE DA ARANHA (Wireframe Spider) ---
 function SpiderWireframe() {
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const spiderColor = "#5f5fd3";
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) return null;
 
   return (
     <div className="absolute top-0 right-[15%] z-30 pointer-events-none opacity-90">
@@ -68,8 +63,7 @@ function SpiderWireframe() {
               r="6"
               stroke={spiderColor}
               strokeWidth="1.5"
-              fill={theme === "light" ? "#ffffff" : "#0a0a0a"}
-              suppressHydrationWarning
+              className="fill-white dark:fill-black transition-colors duration-300"
             />
             <circle
               cx="0"
@@ -77,8 +71,7 @@ function SpiderWireframe() {
               r="9"
               stroke={spiderColor}
               strokeWidth="1.5"
-              fill={theme === "light" ? "#ffffff" : "#0a0a0a"}
-              suppressHydrationWarning
+              className="fill-white dark:fill-black transition-colors duration-300"
             />
 
             {/* Olhos */}
@@ -104,6 +97,33 @@ function SpiderWireframe() {
 // --- COMPONENTE HERO PRINCIPAL ---
 export default function Hero() {
   const themeColor = "95, 95, 211"; // #5f5fd3
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Lógica de Carregamento Programático do Vídeo
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // 1. Forçamos o carregamento (já que preload="none")
+    // Isso tira o request do caminho crítico do LCP, mas garante que aconteça
+    video.load();
+
+    const playVideo = () => {
+      // Tenta dar play. Se o navegador bloquear (economia de bateria/dados), falha silenciosamente.
+      video.play().catch((error) => {
+        console.log("Autoplay suspendido pelo navegador:", error);
+      });
+    };
+
+    // 2. Se já carregou o suficiente, toca. Se não, espera o evento.
+    if (video.readyState >= 3) {
+      playVideo();
+    } else {
+      video.addEventListener("canplay", playVideo);
+    }
+
+    return () => video.removeEventListener("canplay", playVideo);
+  }, []);
 
   // Paths do Logo
   const pathD =
@@ -137,12 +157,14 @@ export default function Hero() {
       {/* 1. CAMADA DE VÍDEO (Background Absoluto) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
-          // "poster" é a imagem que carrega antes do vídeo (importante para performance visual)
-          poster="/video-poster.jpg"
+          // POSTER: Esta imagem carrega instantaneamente e conta como LCP (Largest Contentful Paint)
+          // enquanto o vídeo não inicia.
+          poster="/video-poster.webp"
+          preload="none"
           className="w-full h-full object-cover opacity-60 dark:opacity-40 transition-opacity duration-500"
         >
           <source src="/hero-bg.webm" type="video/webm" />
@@ -167,7 +189,7 @@ export default function Hero() {
         }}
       />
       {/* Efeito extra de ruído para o estilo gótico */}
-      <div className="absolute inset-0 z-3 pointer-events-none opacity-[0.1] bg-[url('/noise.png')] mix-blend-overlay" />
+      <div className="absolute inset-0 z-3 pointer-events-none opacity-[0.1] bg-[url('/noise.webp')] mix-blend-overlay" />
 
       {/* 3. ARANHA (Z-30) */}
       <SpiderWireframe />
