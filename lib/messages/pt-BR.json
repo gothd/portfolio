@@ -1,0 +1,14 @@
+{
+  "Hero": {
+    "title": "gothd.dev",
+    "subtitle": "Desenvolvedor Web",
+    "spiderTitle": "Trocar Tema"
+  },
+  "Metadata": {
+    "title": "Ruan Oliveira Sena | Desenvolvedor Web & Designer",
+    "description": "Portfólio de Ruan Oliveira Sena. Gothd é um ateliê digital focado em experiências web imersivas, performance e a interseção entre código e arte.",
+    "keywords": "Ruan Oliveira Sena, Desenvolvedor Web, Designer, Next.js, Freelancer, Portfólio, Full-stack",
+    "openGraphDescription": "Onde código encontra arte. Portfólio de Ruan Oliveira Sena.",
+    "openGraphImageAlt": "Prévia do Portfólio da Gothd"
+  }
+}

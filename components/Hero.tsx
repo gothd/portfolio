@@ -1,11 +1,13 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
 
 // --- COMPONENTE DA ARANHA (Wireframe Spider) ---
 function SpiderWireframe() {
+  const t = useTranslations("Hero"); // Hook para pegar textos
   const { theme, setTheme } = useTheme();
   const spiderColor = "#5f5fd3";
 
@@ -54,7 +56,7 @@ function SpiderWireframe() {
             whileTap={{ opacity: 0.5 }}
             transition={{ duration: 0.2 }}
           >
-            <title>Trocar Tema</title>
+            <title>{t("spiderTitle")}</title>
 
             {/* Corpo */}
             <circle
@@ -96,6 +98,7 @@ function SpiderWireframe() {
 
 // --- COMPONENTE HERO PRINCIPAL ---
 export default function Hero() {
+  const t = useTranslations("Hero");
   const themeColor = "95, 95, 211"; // #5f5fd3
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -229,10 +232,10 @@ export default function Hero() {
           transition={{ delay: 4.5, duration: 1 }}
         >
           <h1 className="text-5xl md:text-7xl font-serif text-obsidian dark:text-accent tracking-tight mb-2">
-            gothd.dev
+            {t("title")}
           </h1>
           <p className="font-sans font-light text-charcoal dark:text-mist opacity-70 tracking-widest uppercase text-sm">
-            Web Developer
+            {t("subtitle")}
           </p>
         </motion.div>
       </div>
