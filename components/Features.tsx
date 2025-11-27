@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { Database, LucideIcon, Palette, PenTool, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 // Estrutura estática apenas para ícones e referência de chaves
 interface FeatureConfig {
@@ -20,17 +21,41 @@ const featuresConfig: FeatureConfig[] = [
 
 // --- 2. VARIANTES DE ANIMAÇÃO (ENTRADA) ---
 // Função para gerar variantes baseadas no índice do card (Lado vs Centro)
-const getCardVariant = (index: number): Variants => {
+// aceita 'isMobile' como argumento para decidir a coreografia
+const getCardVariant = (index: number, isMobile: boolean): Variants => {
   const isSideLeft = index === 0;
   const isSideRight = index === 3;
   const isCenter = !isSideLeft && !isSideRight;
 
+  // ANIMAÇÃO MOBILE (UX Vertical Limpo)
+  if (isMobile) {
+    return {
+      hidden: {
+        opacity: 0,
+        y: 30, // Vem levemente de baixo
+        x: 0, // Nada de movimento lateral no mobile!
+        scale: 0.95,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        scale: 1,
+        transition: {
+          // Stagger simples baseado no índice (0.1, 0.2, 0.3...)
+          delay: index * 0.15,
+          duration: 0.6,
+          ease: "easeOut",
+        },
+      },
+    };
+  }
+
+  // ANIMAÇÃO DESKTOP (A Coreografia Teatral Original)
   return {
     hidden: {
       opacity: 0,
-      // Laterais vêm de mais longe, centrais ficam parados no eixo X
-      x: isSideLeft ? -150 : isSideRight ? 150 : 0,
-      // Centrais começam menores e descem um pouco (Y) para efeito de "subida"
+      x: isSideLeft ? -100 : isSideRight ? 100 : 0, // Reduzi de 150 para 100 para ser mais seguro
       y: isCenter ? 40 : 0,
       scale: isCenter ? 0.85 : 1,
     },
@@ -40,14 +65,8 @@ const getCardVariant = (index: number): Variants => {
       y: 0,
       scale: 1,
       transition: {
-        // LATERAIS (0 e 3) entram primeiro (delay 0.1)
-        // CENTRAIS (1 e 2) entram depois (delay 0.3) criando a coreografia
         delay: isCenter ? 0.3 : 0.1,
-
-        // Opacidade suave
         opacity: { duration: 1.2, ease: "easeOut" },
-
-        // Movimento elástico elegante
         default: { type: "spring", damping: 25, stiffness: 120 },
       },
     },
@@ -57,19 +76,33 @@ const getCardVariant = (index: number): Variants => {
 export default function Features() {
   const t = useTranslations("Features");
 
+  // Estado para controlar responsividade da animação
+  const [isMobile, setIsMobile] = useState(true); // Começa true para evitar "flicker" de animação lateral errada
+
+  useEffect(() => {
+    const checkMobile = () => {
+      // Consideramos mobile tudo abaixo de 768px (tablet portrait/phone)
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile(); // Check inicial
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section
-      className="min-h-screen py-24 px-6 bg-obsidian relative flex items-center"
+      className="min-h-screen py-24 px-6 bg-obsidian relative flex items-center overflow-hidden"
       id="features"
     >
       <div className="w-full max-w-7xl mx-auto">
-        {/* Título da Seção */}
+        {/* Título */}
         <div className="mb-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8 }}
             className="text-3xl md:text-5xl font-serif text-white mb-4"
           >
             {t("title")}{" "}
@@ -87,7 +120,7 @@ export default function Features() {
           </motion.p>
         </div>
 
-        {/* Grid de Cards */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuresConfig.map((config, index) => {
             const Icon = config.icon;
@@ -95,12 +128,15 @@ export default function Features() {
             return (
               <motion.div
                 key={config.id}
-                // Configuração de Scroll Trigger Replayable
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 0.2, margin: "-50px" }}
-                variants={getCardVariant(index)}
-                // Interação Hover
+                // Margin negativa ajusta o "trigger point" para disparar um pouco antes do elemento entrar totalmente
+                viewport={{
+                  once: false,
+                  amount: 0.2,
+                  margin: isMobile ? "0px" : "-50px",
+                }}
+                variants={getCardVariant(index, isMobile)}
                 whileHover={{
                   y: -12,
                   scale: 1.02,
@@ -112,10 +148,8 @@ export default function Features() {
                            border border-accent-gold/10 
                            shadow-lg hover:shadow-2xl transition-colors duration-300"
               >
-                {/* Brilho decorativo no topo */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-accent-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Ícone e Título */}
                 <div className="mb-6">
                   <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-black/30 border border-white/5 group-hover:border-accent-gold/30 transition-colors duration-300">
                     <Icon
@@ -128,12 +162,10 @@ export default function Features() {
                   </h3>
                 </div>
 
-                {/* Conteúdo */}
                 <p className="text-mist text-sm leading-relaxed mb-6 grow opacity-80 group-hover:opacity-100 transition-opacity">
                   {t(`cards.${config.id}.description`)}
                 </p>
 
-                {/* Rodapé */}
                 <div className="mt-auto pt-6 border-t border-white/5 group-hover:border-accent-gold/20 transition-colors">
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-mono text-accent-gold/80 uppercase tracking-wider">
