@@ -2,6 +2,28 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+:root {
+  /* Variáveis de Animação Seguras (RGBA/HEX) */
+  --card-hover-bg: #ffffff;
+
+  /* Light Mode Repouso: Equivalente ao gray-200 do Tailwind */
+  --card-bg-idle: #e5e7eb;
+
+  /* Light Mode Border: Branco com 20% opacidade (rgba 255,255,255, 0.2) */
+  --card-border-idle: rgba(255, 255, 255, 0.2);
+}
+
+.dark {
+  /* Dark Mode Hover */
+  --card-hover-bg: rgba(30, 30, 36, 0.95);
+
+  /* Dark Mode Repouso: A cor customizada */
+  --card-bg-idle: #1e1e24;
+
+  /* Dark Mode Border: Gold (#c5a050) com 10% opacidade (rgba 197,160,80, 0.1) */
+  --card-border-idle: rgba(197, 160, 80, 0.1);
+}
+
 @theme {
   /* Definindo cores estilo "Goth/Dark" */
   --color-obsidian: #0a0a0a;

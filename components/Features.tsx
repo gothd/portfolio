@@ -1,9 +1,9 @@
 "use client";
 
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion, Variants } from "framer-motion";
 import { Database, LucideIcon, Palette, PenTool, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 
 // Estrutura estática apenas para ícones e referência de chaves
 interface FeatureConfig {
@@ -55,7 +55,7 @@ const getCardVariant = (index: number, isMobile: boolean): Variants => {
   return {
     hidden: {
       opacity: 0,
-      x: isSideLeft ? -100 : isSideRight ? 100 : 0, // Reduzi de 150 para 100 para ser mais seguro
+      x: isSideLeft ? -150 : isSideRight ? 150 : 0,
       y: isCenter ? 40 : 0,
       scale: isCenter ? 0.85 : 1,
     },
@@ -75,24 +75,11 @@ const getCardVariant = (index: number, isMobile: boolean): Variants => {
 
 export default function Features() {
   const t = useTranslations("Features");
-
-  // Estado para controlar responsividade da animação
-  const [isMobile, setIsMobile] = useState(true); // Começa true para evitar "flicker" de animação lateral errada
-
-  useEffect(() => {
-    const checkMobile = () => {
-      // Consideramos mobile tudo abaixo de 768px (tablet portrait/phone)
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile(); // Check inicial
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile();
 
   return (
     <section
-      className="min-h-screen py-24 px-6 bg-obsidian relative flex items-center overflow-hidden"
+      className="min-h-screen py-24 px-6 bg-mist dark:bg-obsidian relative flex items-center overflow-hidden transition-colors duration-500"
       id="features"
     >
       <div className="w-full max-w-7xl mx-auto">
@@ -103,7 +90,7 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl font-serif text-white mb-4"
+            className="text-3xl md:text-5xl font-serif text-obsidian dark:text-white mb-4 transition-colors"
           >
             {t("title")}{" "}
             <span className="text-accent-red italic">{t("titleAccent")}</span>{" "}
@@ -114,7 +101,7 @@ export default function Features() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 1 }}
-            className="text-mist font-light max-w-2xl mx-auto"
+            className="text-charcoal dark:text-mist font-light max-w-2xl mx-auto transition-colors"
           >
             {t("subtitle")}
           </motion.p>
@@ -127,7 +114,7 @@ export default function Features() {
 
             return (
               <motion.div
-                key={config.id}
+                key={`${config.id}-${isMobile}`}
                 initial="hidden"
                 whileInView="visible"
                 // Margin negativa ajusta o "trigger point" para disparar um pouco antes do elemento entrar totalmente
@@ -137,41 +124,52 @@ export default function Features() {
                   margin: isMobile ? "0px" : "-50px",
                 }}
                 variants={getCardVariant(index, isMobile)}
+                // Definimos o estado inicial no style para o Framer ler RGBA e não oklab
+                style={{
+                  borderColor: "var(--card-border-idle)",
+                  backgroundColor: "var(--card-bg-idle)",
+                }}
                 whileHover={{
                   y: -12,
                   scale: 1.02,
                   borderColor: "var(--color-accent-gold)",
-                  backgroundColor: "rgba(30, 30, 36, 0.95)",
+                  backgroundColor: "var(--card-hover-bg)",
                 }}
                 className="flex flex-col p-8 rounded-xl relative overflow-hidden group
-                           bg-card-bg 
-                           border border-accent-gold/10 
-                           shadow-lg hover:shadow-2xl transition-colors duration-300"
+                           border 
+                           shadow-md dark:shadow-lg 
+                           hover:shadow-xl dark:hover:shadow-2xl 
+                           transition-shadow duration-300"
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-accent-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="mb-6">
-                  <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-black/30 border border-white/5 group-hover:border-accent-gold/30 transition-colors duration-300">
+                  <div
+                    className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg 
+                                  bg-gray-300 dark:bg-black/30 
+                                  border border-white/10 dark:border-white/5 
+                                  group-hover:border-accent-gold/30 transition-colors duration-300"
+                  >
                     <Icon
                       size={24}
-                      className="text-accent-gold transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(197,160,80,0.5)]"
+                      className="text-obsidian dark:text-accent-gold transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(197,160,80,0.5)]"
                     />
                   </div>
-                  <h3 className="text-xl font-serif font-bold text-white group-hover:text-accent-gold transition-colors">
+                  <h3 className="text-xl font-serif font-bold text-obsidian dark:text-white group-hover:text-accent-gold transition-colors">
                     {t(`cards.${config.id}.title`)}
                   </h3>
                 </div>
 
-                <p className="text-mist text-sm leading-relaxed mb-6 grow opacity-80 group-hover:opacity-100 transition-opacity">
+                <p className="text-charcoal/80 dark:text-mist text-sm leading-relaxed mb-6 grow opacity-90 group-hover:opacity-100 transition-opacity">
                   {t(`cards.${config.id}.description`)}
                 </p>
 
-                <div className="mt-auto pt-6 border-t border-white/5 group-hover:border-accent-gold/20 transition-colors">
+                <div className="mt-auto pt-6 border-t border-gray-300 dark:border-white/5 group-hover:border-accent-gold/20 transition-colors">
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-mono text-accent-gold/80 uppercase tracking-wider">
+                    <span className="text-xs font-mono text-accent-red dark:text-accent-gold/80 uppercase tracking-wider font-semibold">
                       {config.tech}
                     </span>
-                    <span className="text-xs text-gray-500 italic group-hover:text-mist">
+                    <span className="text-xs text-gray-500 dark:text-gray-500 italic group-hover:text-gray-600 dark:group-hover:text-gray-400">
                       {t(`cards.${config.id}.target`)}
                     </span>
                   </div>
