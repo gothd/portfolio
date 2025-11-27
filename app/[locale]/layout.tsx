@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import SmoothScrolling from "@/components/SmoothScrolling";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
     creator: "Ruan Oliveira Sena",
     openGraph: {
       title: t("title"),
-      description: t("openGraphDescription"),
+      description: t("openGraph.description"),
       url: "https://gothd.dev",
       siteName: "Gothd",
       locale: locale,
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
           url: "/preview.jpg",
           width: 1200,
           height: 630,
-          alt: t("openGraphImageAlt"),
+          alt: t("openGraph.images.0.alt"),
         },
       ],
     },
@@ -62,14 +63,16 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${inter.variable} ${merriweather.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem={false}
-          >
-            <Header />
-            {children}
-          </ThemeProvider>
+          <SmoothScrolling>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem={false}
+            >
+              <Header />
+              {children}
+            </ThemeProvider>
+          </SmoothScrolling>
         </NextIntlClientProvider>
       </body>
     </html>

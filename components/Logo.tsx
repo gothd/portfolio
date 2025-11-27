@@ -24,7 +24,7 @@ export default function Logo({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 162.13792 146.34186"
       className={className}
-      aria-label="GothD Logo"
+      aria-label="Gothd Logo"
     >
       <g transform="translate(-174.93104,-182.82907)">
         <g transform="translate(18.551037,22.93907)">

@@ -2,106 +2,72 @@
 
 ![Project Preview](./public/preview.jpg)
 
-> Um template de portfólio construído com a stack mais moderna do ecossistema React. Focado em micro-interações, animações SVG e estética Dark/Gothic minimalista.
+> Template de portfólio focado em micro-interações, animações SVG e estética dark minimalista. Explora a interseção entre código e arte com **Next.js 16**, **Tailwind CSS v4** e **next-intl**.
 
-Este projeto explora a interseção entre código e arte, utilizando **Next.js 16** e o novo motor do **Tailwind CSS v4.0**.
+## ✨ Recursos
 
-## ✨ Destaques & Recursos
-
-- **Stack de Ponta:** Next.js 16 (App Router) + Tailwind CSS v4.
-- **Dark Mode Interativo:** Um toggle de tema único em formato de aranha (`SpiderWireframe`) com física de animação.
-- **Animações SVG:** Desenho de linhas vetoriais (SVG Path drawing) utilizando **Framer Motion**.
-- **Performance Visual:** Background de vídeo otimizado com overlay de ruído e vinheta adaptativa.
-- **Tipografia:** Configuração elegante combinando Serif (Merriweather) e Sans (Inter).
+- **Stack Moderna:** Next.js 16 (App Router), Tailwind v4 (CSS-first config), TypeScript.
+- **Internacionalização (i18n):** Suporte nativo a PT-BR e EN via `next-intl`, com roteamento e SEO dinâmico.
+- **Dark Mode Interativo:** Toggle de tema único (`SpiderWireframe`) com física via Framer Motion.
+- **Performance Visual:** Background de vídeo otimizado (LCP) com overlay adaptativo e ruído.
+- **Animações:** Desenho de caminho SVG e header "scroll-aware".
 
 ## 🛠️ Tecnologias
 
 - [Next.js 16](https://nextjs.org/)
 - [Tailwind CSS v4](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
-- [Next Themes](https://github.com/pacocoursey/next-themes)
+- [next-intl](https://next-intl.dev/)
+- [next-themes](https://github.com/pacocoursey/next-themes)
 
-## 🚀 Como Rodar Localmente
+## 🚀 Rodando Localmente
 
-1. **Clone o repositório:**
+```bash
+git clone [https://github.com/gothd/portfolio.git](https://github.com/gothd/portfolio.git)
+cd portfolio
+npm install # ou pnpm/yarn
+npm run dev
+```
 
-   ```bash
-   git clone https://github.com/gothd/portfolio.git
-   cd portfolio
-   ```
+Acesse `http://localhost:3000`.
 
-2. **Instale as dependências:**
+## 🎨 Personalização Rápida
 
-   ```bash
-   npm install
-   # ou
-   yarn install
-   # ou
-   pnpm install
-   ```
+### Cores e Fontes
 
-3. **Inicie o servidor de desenvolvimento:**
-
-   ```bash
-   npm run dev
-   ```
-
-4. **Acesse:** Abra `http://localhost:3000` no seu navegador.
-
-## 🎨 Como Personalizar
-
-Este template foi feito para ser seu. Veja como alterar os principais pontos:
-
-### 1\. Cores e Fontes (Tailwind v4)
-
-Diferente das versões anteriores, a configuração do Tailwind v4 fica diretamente no CSS.
-Vá em `app/globals.css`:
+Edite as variáveis CSS nativas em `app/globals.css`:
 
 ```css
 @theme {
-  /* Altere sua paleta de cores aqui */
   --color-obsidian: #0a0a0a; /* Fundo Dark */
   --color-accent: #d4d4d8; /* Cor de destaque */
-
-  /* Altere suas fontes */
   --font-serif: "Merriweather", serif;
 }
 ```
 
-### 2\. O Logo (SVG Animado)
+### Textos e Traduções
 
-O logo "GD" é desenhado via código no arquivo `components/Hero.tsx`.
-Para usar o seu logo:
+Edite os arquivos JSON em `messages/`:
 
-1.  Converta seu logo (Illustrator/Figma) para SVG.
-2.  Copie os dados do `path` (o atributo `d="..."`).
-3.  No componente `Hero`, substitua as constantes `pathD` e `pathG` pelos caminhos do seu logo.
+- `pt-BR.json`: Textos em Português.
+- `en.json`: Textos em Inglês.
 
-### 3\. Vídeo de Background
+### Assets (Logo e Vídeo)
 
-Substitua os arquivos na pasta `/public`:
+- **Logo SVG:** Substitua os paths `pathD` e `pathG` em `components/Hero.tsx`.
+- **Vídeo:** Substitua `hero-bg.webm/mp4` e `video-poster.jpg` na pasta `/public`.
 
-- `hero-bg.webm` (Vídeo principal, recomendo \< 3MB).
-- `hero-bg.mp4` (Fallback para Safari/iOS).
-- `video-poster.jpg` (Imagem estática que carrega antes do vídeo).
-- `noise.png` (Textura de ruído para o efeito gótico).
-
-### 4\. A Aranha (Toggle de Tema)
-
-A lógica da aranha está no componente `SpiderWireframe` dentro de `Hero.tsx`. Se quiser mudar a cor da aranha ou a velocidade da animação, ajuste as variáveis `spiderColor` e as propriedades de `transition` do Framer Motion.
-
-## 📂 Estrutura do Projeto
+## 📂 Estrutura Principal
 
 ```
-├── app/
-│   ├── layout.tsx      # Configuração global e ThemeProvider
-│   ├── page.tsx        # Página principal
-│   └── globals.css     # Configuração do Tailwind v4 e variáveis
-├── components/
-│   ├── Hero.tsx        # Componente principal (Logo, Vídeo, Aranha)
-│   └── ThemeProvider.tsx
-├── public/             # Assets estáticos (vídeos, imagens)
-└── ...
+├── app/[locale]/       # Rotas internacionalizadas
+│   ├── layout.tsx      # Layout principal com i18n e ThemeProvider
+│   └── page.tsx        # Página Home
+├── components/         # Componentes React (Hero, Header, Spider, etc.)
+├── messages/           # Arquivos de tradução (pt-BR.json, en.json)
+├── public/             # Assets estáticos
+├── src/                # Configurações de i18n e navegação
+└── proxy.ts            # Middleware do Next.js (roteamento i18n)
 ```
 
 ## 📄 Licença

@@ -1,14 +1,48 @@
 {
+  "Metadata": {
+    "title": "Ruan Oliveira Sena | Web Developer & Designer",
+    "description": "Ruan Oliveira Sena’s portfolio — Gothd is a digital atelier crafting immersive web experiences, blending performance with artistry at the intersection of code and design.",
+    "keywords": "Ruan Oliveira Sena, Web Developer, Designer, Next.js, Freelancer, Portfolio, Full-stack",
+    "openGraph": {
+      "description": "Where code meets art — the portfolio of Ruan Oliveira Sena.",
+      "images": [
+        {
+          "alt": "Gothd Portfolio Preview"
+        }
+      ]
+    }
+  },
   "Hero": {
     "title": "gothd.dev",
     "subtitle": "Web Developer",
     "spiderTitle": "Toggle Theme"
   },
-  "Metadata": {
-    "title": "Ruan Oliveira Sena | Web Developer & Designer",
-    "description": "Ruan Oliveira Sena’s portfolio — Gothd is a digital atelier crafting immersive web experiences, blending performance with artistry at the intersection of code and design.",
-    "keywords": "Ruan Oliveira Sena, Web Developer, Designer, Next.js, Freelancer, Portfolio, Full-stack",
-    "openGraphDescription": "Where code meets art — the portfolio of Ruan Oliveira Sena.",
-    "openGraphImageAlt": "Gothd Portfolio Preview"
+  "Features": {
+    "title": "Engineering",
+    "titleAccent": "&",
+    "titleEnd": "Art",
+    "subtitle": "Robust technical solutions with a digital atelier finish.",
+    "cards": {
+      "performance": {
+        "title": "High Performance (SEO)",
+        "description": "Ultra-fast pages optimized for Google. Ensure your brand is found and loads instantly.",
+        "target": "Ideal for conversion"
+      },
+      "systems": {
+        "title": "Systems & Dashboards",
+        "description": "Centralize your company command. Manage inventory, clients, and vital data with security and integrity.",
+        "target": "To scale operations"
+      },
+      "cms": {
+        "title": "Manageable Sites (CMS)",
+        "description": "Total autonomy. Edit texts and publish articles without touching code or depending on daily support.",
+        "target": "For content creators"
+      },
+      "design": {
+        "title": "UI/UX & Prototyping",
+        "description": "Interfaces that guide the user. Design crafted with visual identity and enchanting micro-interactions.",
+        "target": "For unique brands"
+      }
+    }
   }
 }

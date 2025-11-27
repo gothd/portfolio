@@ -1,14 +1,48 @@
 {
+  "Metadata": {
+    "title": "Ruan Oliveira Sena | Desenvolvedor Web & Designer",
+    "description": "Portfólio de Ruan Oliveira Sena. Gothd é um ateliê digital focado em experiências web imersivas, performance e a interseção entre código e arte.",
+    "keywords": "Ruan Oliveira Sena, Desenvolvedor Web, Designer, Next.js, Freelancer, Portfólio, Full-stack",
+    "openGraph": {
+      "description": "Onde código encontra arte. Portfólio de Ruan Oliveira Sena.",
+      "images": [
+        {
+          "alt": "Prévia do Portfólio da Gothd"
+        }
+      ]
+    }
+  },
   "Hero": {
     "title": "gothd.dev",
     "subtitle": "Desenvolvedor Web",
     "spiderTitle": "Trocar Tema"
   },
-  "Metadata": {
-    "title": "Ruan Oliveira Sena | Desenvolvedor Web & Designer",
-    "description": "Portfólio de Ruan Oliveira Sena. Gothd é um ateliê digital focado em experiências web imersivas, performance e a interseção entre código e arte.",
-    "keywords": "Ruan Oliveira Sena, Desenvolvedor Web, Designer, Next.js, Freelancer, Portfólio, Full-stack",
-    "openGraphDescription": "Onde código encontra arte. Portfólio de Ruan Oliveira Sena.",
-    "openGraphImageAlt": "Prévia do Portfólio da Gothd"
+  "Features": {
+    "title": "Engenharia",
+    "titleAccent": "&",
+    "titleEnd": "Arte",
+    "subtitle": "Soluções técnicas robustas com acabamento de ateliê digital.",
+    "cards": {
+      "performance": {
+        "title": "Alta Performance (SEO)",
+        "description": "Páginas ultra-rápidas otimizadas para o Google. Garanta que sua marca seja encontrada e carregue instantaneamente.",
+        "target": "Ideal para conversão"
+      },
+      "systems": {
+        "title": "Sistemas & Dashboards",
+        "description": "Centralize o comando da sua empresa. Gerencie estoques, clientes e dados vitais com segurança e integridade.",
+        "target": "Para escalar operações"
+      },
+      "cms": {
+        "title": "Sites Gerenciáveis (CMS)",
+        "description": "Autonomia total. Edite textos e publique artigos sem tocar em código ou depender de suporte técnico.",
+        "target": "Para criadores de conteúdo"
+      },
+      "design": {
+        "title": "UI/UX & Prototipagem",
+        "description": "Interfaces que guiam o usuário. Design pensado na identidade visual e micro-interações que encantam.",
+        "target": "Para marcas únicas"
+      }
+    }
   }
 }

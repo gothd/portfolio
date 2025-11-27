@@ -9,13 +9,11 @@
   --color-mist: #a3a3a3;
   --color-accent: #d4d4d8; /* Um prata pálido */
 
+  --color-accent-red: #8a0a0a; /* Vermelho Sangue Profundo */
+  --color-accent-gold: #c5a050; /* Ouro Envelhecido */
+  --color-card-bg: #1e1e24; /* Cinza Azulado Profundo */
+
   /* Fontes para o estilo Ateliê */
   --font-serif: "Merriweather", serif;
   --font-sans: "Inter", sans-serif;
 }
-/* 
-@layer base {
-  body {
-    @apply bg-obsidian text-mist;
-  }
-} */
