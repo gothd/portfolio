@@ -44,5 +44,17 @@
         "target": "For unique brands"
       }
     }
+  },
+  "Footer": {
+    "title": "Let’s craft something",
+    "titleAccent": "unforgettable?",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "messagePlaceholder": "Your Message...",
+    "sendButton": "Send the Bat",
+    "sending": "Taking flight...",
+    "success": "Delivered in the shadows.",
+    "copyright": "All rights reserved.",
+    "email": "contact@gothd.dev"
   }
 }

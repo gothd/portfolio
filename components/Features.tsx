@@ -79,7 +79,8 @@ export default function Features() {
 
   return (
     <section
-      className="min-h-screen py-24 px-6 bg-mist dark:bg-obsidian relative flex items-center overflow-hidden transition-colors duration-500"
+      // Usamos bg-charcoal no dark para diferenciar sutilmente do Hero (obsidian)
+      className="min-h-screen py-24 px-6 bg-gray-200 dark:bg-charcoal relative flex items-center overflow-hidden transition-colors duration-500"
       id="features"
     >
       <div className="w-full max-w-7xl mx-auto">

@@ -11,6 +11,11 @@
 
   /* Light Mode Border: Branco com 20% opacidade (rgba 255,255,255, 0.2) */
   --card-border-idle: rgba(255, 255, 255, 0.2);
+
+  /* FOOTER INPUTS (Light Mode) */
+  --input-border-idle: rgba(0, 0, 0, 0.2);
+  --input-border-focus: #8a0a0a; /* Accent Red */
+  --bat-color: #1e1e24;
 }
 
 .dark {
@@ -22,6 +27,11 @@
 
   /* Dark Mode Border: Gold (#c5a050) com 10% opacidade (rgba 197,160,80, 0.1) */
   --card-border-idle: rgba(197, 160, 80, 0.1);
+
+  /* FOOTER INPUTS (Dark Mode) */
+  --input-border-idle: rgba(255, 255, 255, 0.2);
+  --input-border-focus: #c5a050; /* Accent Gold */
+  --bat-color: #d4d4d8;
 }
 
 @theme {

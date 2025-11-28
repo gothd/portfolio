@@ -44,5 +44,17 @@
         "target": "Para marcas únicas"
       }
     }
+  },
+  "Footer": {
+    "title": "Vamos criar algo",
+    "titleAccent": "memorável?",
+    "namePlaceholder": "Seu Nome",
+    "emailPlaceholder": "Seu Email",
+    "messagePlaceholder": "Sua Mensagem...",
+    "sendButton": "Enviar o Morcego",
+    "sending": "Voando...",
+    "success": "Entregue nas sombras.",
+    "copyright": "Todos os direitos reservados.",
+    "email": "contato@gothd.dev"
   }
 }
