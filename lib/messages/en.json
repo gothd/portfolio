@@ -45,6 +45,43 @@
       }
     }
   },
+  "Projects": {
+    "title": "Selected Works",
+    "subtitle": "Artifacts of digital engineering",
+    "list": {
+      "project1": {
+        "category": "Full-Stack Web & Strategic SEO",
+        "name": "MR Law Firm",
+        "description": "Development of a comprehensive platform for a premium law firm, focused on semantic authority and lead conversion. The project integrates a scalable legal blog, service pages structured in SEO silos, and a dynamic Landing Page builder for paid traffic campaigns.",
+        "technologies": ["Next.js 15 (App Router)", "React", "Tailwind CSS", "TypeScript"],
+        "highlights": ["Modular Management", "Performance", "Mobile-First"],
+        "image": "/projects/mradvocacia.webp",
+        "gif": "/projects/mradvocacia.gif",
+        "url": "https://advocaciamr.adv.br"
+      },
+      "project2": {
+        "category": "Web App",
+        "name": "Vortex System",
+        "description": "High-performance analytical dashboard for real-time data visualization."
+      },
+      "project3": {
+        "category": "Landing Page",
+        "name": "Silva Architecture",
+        "description": "Award-winning institutional site with immersive scroll animations and bold typography."
+      },
+      "project4": {
+        "category": "Mobile",
+        "name": "Neon Bank",
+        "description": "Financial application focused on user experience and biometric security.",
+        "link": ""
+      }
+    },
+    "listCardButtonLabel": "View Project",
+    "modalHighlightsTitle": "Bullet Points",
+    "modalTechTitle": "Tech Stack",
+    "viewWebsite": "View Website",
+    "closeModal": "Close"
+  },
   "Footer": {
     "title": "Let’s craft something",
     "titleAccent": "unforgettable?",

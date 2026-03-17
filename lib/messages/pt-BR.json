@@ -45,6 +45,27 @@
       }
     }
   },
+  "Projects": {
+    "title": "Obras Selecionadas",
+    "subtitle": "Artefactos de engenharia digital",
+    "list": {
+      "project1": {
+        "category": "Desenvolvimento Web Full Stack & SEO Estratégico",
+        "name": "MR Advocacia — Ecossistema Digital de Alta Performance",
+        "description": "Desenvolvimento de uma plataforma completa para escritório de advocacia premium, focada em autoridade semântica e conversão de leads. O projeto integra um blog jurídico escalável, páginas de serviços estruturadas em silos para SEO e um construtor dinâmico de Landing Pages para campanhas de tráfego pago.",
+        "technologies": ["Next.js 15 (App Router)", "React", "Tailwind CSS", "TypeScript"],
+        "highlights": ["Gestão Modular", "Performance", "Mobile-First"],
+        "image": "/projects/mradvocacia.webp",
+        "gif": "/projects/mradvocacia.gif",
+        "url": "https://advocaciamr.adv.br"
+      }
+    },
+    "listCardButtonLabel": "Ver Projeto",
+    "modalTechTitle": "Tecnologias",
+    "modalHighlightsTitle": "Diferenciais",
+    "viewWebsite": "Ver o Site",
+    "closeModal": "Fechar"
+  },
   "Footer": {
     "title": "Vamos criar algo",
     "titleAccent": "memorável?",

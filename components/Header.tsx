@@ -3,7 +3,7 @@
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import LanguageSelector from "./LanguageSelector";
-import Logo from "./Logo"; // O componente estático que criamos antes
+import Logo from "./Logo";
 
 export default function Header() {
   const { scrollY } = useScroll();
