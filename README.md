@@ -8,6 +8,8 @@
 
 - **Stack Moderna:** Next.js 16 (App Router), Tailwind v4 (CSS-first config), TypeScript.
 - **Internacionalização (i18n):** Suporte nativo a PT-BR e EN via `next-intl`, com roteamento e SEO dinâmico.
+- **Contato Integrado:** Formulário de contato funcional e seguro utilizando Next.js Server Actions e a API do **Resend**.
+- **Arquitetura de Marketing:** Suporte a subdomínios dinâmicos (ex: `whatsapp.gothd.dev`) reescritos silenciosamente via Middleware para hospedar Landing Pages de alta conversão dentro do mesmo repositório.
 - **Dark Mode Interativo:** Toggle de tema único (`SpiderWireframe`) com física via Framer Motion.
 - **Performance Visual:** Background de vídeo otimizado (LCP) com overlay adaptativo e ruído.
 - **Animações:** Desenho de caminho SVG e header "scroll-aware".
@@ -19,6 +21,7 @@
 - [Framer Motion](https://www.framer.com/motion/)
 - [next-intl](https://next-intl.dev/)
 - [next-themes](https://github.com/pacocoursey/next-themes)
+- [Resend](https://resend.com/)
 
 ## 🚀 Rodando Localmente
 
@@ -45,6 +48,14 @@ Edite as variáveis CSS nativas em `app/globals.css`:
 }
 ```
 
+### Variáveis de Ambiente
+
+Para que o formulário de contato funcione localmente, crie um arquivo `.env.local` na raiz do projeto e adicione sua chave da API do Resend:
+
+```env
+RESEND_API_KEY=re_sua_chave_aqui
+```
+
 ### Textos e Traduções
 
 Edite os arquivos JSON em `messages/`:
@@ -60,14 +71,17 @@ Edite os arquivos JSON em `messages/`:
 ## 📂 Estrutura Principal
 
 ```
-├── app/[locale]/       # Rotas internacionalizadas
-│   ├── layout.tsx      # Layout principal com i18n e ThemeProvider
-│   └── page.tsx        # Página Home
-├── components/         # Componentes React (Hero, Header, Spider, etc.)
-├── messages/           # Arquivos de tradução (pt-BR.json, en.json)
-├── public/             # Assets estáticos
-├── src/                # Configurações de i18n e navegação
-└── proxy.ts            # Middleware do Next.js (roteamento i18n)
+├── app/
+│   ├── actions/        # Server Actions (ex: envio de e-mail com Resend)
+│   ├── [locale]/       # Rotas internacionalizadas
+│   │   ├── lp/         # Landing Pages e campanhas de marketing
+│   │   ├── layout.tsx  # Layout principal com i18n e ThemeProvider
+│   │   └── page.tsx    # Página Home
+├── components/         # Componentes React reutilizáveis
+├── i18n/               # Configurações de roteamento do next-intl
+├── lib/
+│   └── messages/       # Dicionários JSON (pt-BR, en)
+└── proxy.ts            # Middleware interceptador (i18n + Subdomínios)
 ```
 
 ## 📄 Licença

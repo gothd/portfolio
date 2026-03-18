@@ -93,5 +93,44 @@
     "success": "Delivered in the shadows.",
     "copyright": "All rights reserved.",
     "email": "contact@gothd.dev"
+  },
+  "LP": {
+    "whatsapp": {
+      "hero": {
+        "title": "Your Digital Presence with ",
+        "titleAccent": "Elite Performance",
+        "description": "I build custom websites and applications that load in milliseconds and are focused on converting visitors into real customers."
+      },
+      "features": {
+        "speed": {
+          "title": "Extreme Speed",
+          "desc": "Google-optimized sites that load instantly on any connection."
+        },
+        "management": {
+          "title": "Total Control",
+          "desc": "Intuitive admin panel for you to update text and images without hassle."
+        },
+        "custom": {
+          "title": "Custom Design",
+          "desc": "No ready-made templates. A unique look that conveys your brand's authority."
+        }
+      },
+      "cta": {
+        "button": "Request a Free Quote",
+        "waMessage": "Hi Ruan! I'd like to learn more about creating a website for my business."
+      },
+      "socialProof": {
+        "title": "Projects that deliver value",
+        "mradvocacia": {
+          "name": "MR Advocacia",
+          "description": "Robust institutional platform for the legal sector, focused on authority and lead generation.",
+          "highlights": [
+            "High performance on Google",
+            "Lead Generation and Funnel",
+            "Exclusive Design"
+          ]
+        }
+      }
+    }
   }
 }

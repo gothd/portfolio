@@ -77,5 +77,44 @@
     "success": "Entregue nas sombras.",
     "copyright": "Todos os direitos reservados.",
     "email": "contato@gothd.dev"
+  },
+  "LP": {
+    "whatsapp": {
+      "hero": {
+        "title": "Sua Presença Digital com ",
+        "titleAccent": "Performance de Elite",
+        "description": "Desenvolvo sites e aplicações personalizadas que carregam em milissegundos e são focadas em converter visitantes em clientes reais."
+      },
+      "features": {
+        "speed": {
+          "title": "Velocidade Extrema",
+          "desc": "Sites otimizados para o Google que carregam instantaneamente em qualquer conexão."
+        },
+        "management": {
+          "title": "Gestão Total",
+          "desc": "Painel administrativo intuitivo para você atualizar textos e imagens sem complicações."
+        },
+        "custom": {
+          "title": "Design Sob Medida",
+          "desc": "Nada de templates prontos. Um visual único que transmite a autoridade da sua marca."
+        }
+      },
+      "cta": {
+        "button": "Solicitar Orçamento Grátis",
+        "waMessage": "Olá Ruan! Gostaria de saber mais sobre a criação de um site para o meu negócio."
+      },
+      "socialProof": {
+        "title": "Projetos que entregam valor",
+        "mradvocacia": {
+          "name": "MR Advocacia",
+          "description": "Plataforma institucional robusta para o setor jurídico, focada em autoridade e captura de leads.",
+          "highlights": [
+            "Alta performance no Google",
+            "Captação e Funil de Leads",
+            "Design Exclusivo"
+          ]
+        }
+      }
+    }
   }
 }
