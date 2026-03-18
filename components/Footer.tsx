@@ -1,8 +1,9 @@
 "use client";
 
+import { sendEmail } from "@/app/actions/email";
 import { motion, Variants } from "framer-motion";
 import { Github, Linkedin, Mail, Send } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
 
 // --- WIREFRAME BAT COMPONENT ---
@@ -57,16 +58,23 @@ function BatDelivery({ isFlying }: { isFlying: boolean }) {
 // --- RODAPÉ PRINCIPAL ---
 export default function Footer() {
   const t = useTranslations("Footer");
+  const locale = useLocale();
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
 
-    // Simula envio (substituir por Server Action ou API real)
-    await new Promise((resolve) => setTimeout(resolve, 2500));
+    const formData = new FormData(e.currentTarget);
+    const result = await sendEmail(formData);
 
-    setStatus("success");
+    if (result.success) {
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } else {
+      console.error("❌ Erro ao enviar:", result.error);
+      setStatus("idle");
+    }
     // Reseta após 3s
     setTimeout(() => setStatus("idle"), 3000);
   };
@@ -119,18 +127,21 @@ export default function Footer() {
         {/* Cabeçalho */}
         <motion.div variants={itemVariants} className="mb-16 text-center">
           <h2 className="text-4xl md:text-6xl font-serif text-obsidian dark:text-white mb-4">
-            {t("title")}{" "}
-            <span className="text-accent-red italic">{t("titleAccent")}</span>
+            {t("title")} <span className="text-accent-red italic">{t("titleAccent")}</span>
           </h2>
         </motion.div>
 
         {/* Formulário Estilo Assinatura */}
         <form onSubmit={handleSubmit} className="space-y-12">
+          {/* Input oculto para enviar o idioma para a Server Action */}
+          <input type="hidden" name="locale" value={locale} />
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Input Nome */}
             <motion.div variants={itemVariants} className="relative group">
               <motion.input
                 type="text"
+                name="name"
                 placeholder={t("namePlaceholder")}
                 className="w-full bg-transparent border-b-2 border-charcoal/20 dark:border-white/20 py-4 text-xl text-obsidian dark:text-mist outline-none placeholder:text-charcoal/40 dark:placeholder:text-mist/30 transition-colors font-serif"
                 variants={inputVariants}
@@ -143,6 +154,7 @@ export default function Footer() {
             <motion.div variants={itemVariants} className="relative group">
               <motion.input
                 type="email"
+                name="email"
                 placeholder={t("emailPlaceholder")}
                 className="w-full bg-transparent border-b-2 border-charcoal/20 dark:border-white/20 py-4 text-xl text-obsidian dark:text-mist outline-none placeholder:text-charcoal/40 dark:placeholder:text-mist/30 transition-colors font-serif"
                 variants={inputVariants}
@@ -156,6 +168,7 @@ export default function Footer() {
           {/* Textarea Mensagem */}
           <motion.div variants={itemVariants} className="relative group">
             <motion.textarea
+              name="message"
               placeholder={t("messagePlaceholder")}
               rows={3}
               className="w-full bg-transparent border-b-2 border-charcoal/20 dark:border-white/20 py-4 text-xl text-obsidian dark:text-mist outline-none placeholder:text-charcoal/40 dark:placeholder:text-mist/30 resize-none transition-colors font-serif"
@@ -167,10 +180,7 @@ export default function Footer() {
           </motion.div>
 
           {/* Botão com Morcego Secreto */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center pt-8 relative"
-          >
+          <motion.div variants={itemVariants} className="flex justify-center pt-8 relative">
             {/* O MORCEGO (Z-0, atrás do botão) */}
             <BatDelivery isFlying={status === "sending"} />
 
@@ -187,11 +197,7 @@ export default function Footer() {
                 font-mono font-bold tracking-widest uppercase text-sm
                 shadow-xl hover:shadow-2xl transition-all duration-500
                 flex items-center gap-3
-                ${
-                  status !== "idle"
-                    ? "cursor-default opacity-80"
-                    : "cursor-pointer"
-                }
+                ${status !== "idle" ? "cursor-default opacity-80" : "cursor-pointer"}
               `}
             >
               <span className="relative z-10">
@@ -226,10 +232,7 @@ export default function Footer() {
           <a href="#" className="hover:text-accent-red transition-colors">
             <Linkedin size={20} />
           </a>
-          <a
-            href={`mailto:${t("email")}`}
-            className="hover:text-accent-red transition-colors"
-          >
+          <a href={`mailto:${t("email")}`} className="hover:text-accent-red transition-colors">
             <Mail size={20} />
           </a>
         </div>
